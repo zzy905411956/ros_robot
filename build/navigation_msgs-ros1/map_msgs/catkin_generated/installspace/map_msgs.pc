@@ -1,0 +1,8 @@
+prefix=/home/clm/catkin_ws/install
+
+Name: map_msgs
+Description: Description of map_msgs
+Version: 1.13.1
+Cflags: -I/home/clm/catkin_ws/install/include
+Libs: -L/home/clm/catkin_ws/install/lib 
+Requires: message_runtime nav_msgs sensor_msgs std_msgs

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- 启动MRobot -->
+    <include file="$(find my_package)/launch/node.launch" />
+
+    <!-- 加载机器人模型参数 -->
+    
+    <node name="base2laser" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 1 /base_link /laser 50"/>
+
+   
+
+    <!-- 运行激光雷达驱动 -->
+    <include file="$(find my_package)/launch/rplidar.launch" />
+
+</launch>

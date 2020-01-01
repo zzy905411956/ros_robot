@@ -1,0 +1,23 @@
+
+<launch>
+	<!--node-->
+    <node name="base_controll" pkg="my_package" type="talker.py" output="screen"></node>
+    
+    <node name="listener" pkg="my_package" type="listener.py" output="screen"></node>
+	<!-- 加载机器人模型参数 -->
+    <arg name="urdf_file" default="$(find xacro)/xacro --inorder '$(find mrobot_description)/urdf/mrobot_with_rplidar.urdf.xacro'" />
+    <param name="robot_description" command="$(arg urdf_file)" />
+    <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" output="screen" clear_params="true">
+        <rosparam file="$(find mrobot_bringup)/config/fake_mrobot_arbotix.yaml" command="load" />
+        <param name="sim" value="true"/>
+    </node>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+        <param name="publish_frequency" type="double" value="20.0" />
+    </node>
+    
+
+
+    <include file="$(find my_package)/launch/rplidar.launch" />
+
+</launch>
